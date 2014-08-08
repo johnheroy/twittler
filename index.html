@@ -7,19 +7,25 @@
   </head>
   <body>
     <div class="container">
-      yooo
+      <div class="logo">twittler</div>
+      <div class="profile">
+        <div class="profile-title">My Profile</div>
+        <div class="profile-pic-container">There is no picture here yet...</div>
+      </div>
+      <div class="tweets"></div>
     </div>
 
     <script>
 
       $(document).ready(function(){
         var $body = $('body');
+        var $tweets = $('.tweets');
         //$body.html('');
 
         var displayTweet = function(tweet) {
-          var $tweet = $('<div></div>');
+          var $tweet = $('<div class="tweet"></div>');
           $tweet.text('@' + tweet.user + ': ' + tweet.message + ' at ' + tweet.created_at);
-          $tweet.prependTo($body);
+          $tweet.prependTo($tweets);
         };
 
         var fetchNewTweets = function() {

@@ -29,6 +29,7 @@
         var $body = $('body');
         var $tweets = $('.tweets');
         var $newTweets = $('.new-tweets');
+        var $newTweetsButton = $('.new-tweets-button');
         var newTweetCount = 0;
 
         var displayTweet = function(tweet) {
@@ -53,9 +54,9 @@
 
           newTweetCount += 1;
           if (newTweetCount === 1) {
-            $('.new-tweets-button').text('There is ' + newTweetCount + ' new tweet!');  
+            $newTweetsButton.text('There is ' + newTweetCount + ' new tweet!');  
           } else {
-            $('.new-tweets-button').text('There are ' + newTweetCount + ' new tweets!');  
+            $newTweetsButton.text('There are ' + newTweetCount + ' new tweets!');  
           }
           $newTweets.show(500);
           $tweets.height(479);
@@ -80,9 +81,10 @@
         };
 
         var showNewTweets = function () {
+          $newTweets.hide();
           $tweets.children().show();
           newTweetCount = 0;
-          $newTweets.hide();
+          $newTweetsButton.text('');
           $tweets.height(480);
         };
 

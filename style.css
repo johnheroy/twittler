@@ -17,7 +17,7 @@
   font-weight: bold;
   font-family: "Arial Black", Gadget, sans-serif;
   background-color: #863BE6;
-  color: #D0C9C5;
+  color: white;
   border-top-right-radius: 10px;
   border-top-left-radius: 10px;
 }
@@ -54,9 +54,36 @@
 .tweets {
   height: 520px;
   width: 550px;
-  background-color: blue;
+  background-color: white;
   display: inline-block;
   float: right;
   overflow: auto;
   border-bottom-right-radius: 10px;
+}
+
+.tweet {
+  width: 100%;
+  border-bottom: 1px solid grey;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.tweet-username {
+  float: left;
+  margin-top: 5px;
+  margin-left: 5px;
+  color: blue;
+}
+
+.tweet-time {
+  float: right;
+  margin-top: 5px;
+  margin-right: 5px;
+  color: grey;
+}
+
+.tweet-message {
+  clear: both;
+  margin-left: 10px;
+  margin-bottom: 5px;
 }

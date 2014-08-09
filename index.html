@@ -11,6 +11,13 @@
       <div class="profile">
         <div class="profile-title">My Profile</div>
         <div class="profile-pic-container">There is no picture here yet...</div>
+        <!-- need some input for email + "username" and then below a place to send a new twittle -->
+        <form>
+          Email: <input type="text" placeholder="for your picture..."><br>
+          Username: <input type="text" placeholder="be creative!">
+        </form>
+        <h3>Compose a tweetle</h3>
+        <textarea rows="4" cols="30"></textarea>
       </div>
       <div class="tweets"></div>
     </div>
@@ -20,11 +27,25 @@
       $(document).ready(function(){
         var $body = $('body');
         var $tweets = $('.tweets');
-        //$body.html('');
 
         var displayTweet = function(tweet) {
           var $tweet = $('<div class="tweet"></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + ' at ' + tweet.created_at);
+
+          // username
+          $username = $('<div class="tweet-username"></div>');
+          $username.text('@' + tweet.user);
+          $username.appendTo($tweet);
+
+          // time
+          $time = $('<div class="tweet-time"></div>');
+          $time.text(tweet.created_at);
+          $time.appendTo($tweet);
+
+          // message
+          $message = $('<div class="tweet-message"></div>');
+          $message.text(tweet.message);
+          $message.appendTo($tweet);
+
           $tweet.prependTo($tweets);
         };
 

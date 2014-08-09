@@ -58,6 +58,27 @@
 
 /* tweets area */
 
+.new-tweets {
+  height: 40px;
+  width: 550px;
+  border-bottom: 1px solid grey;
+  float: left;
+}
+
+.new-tweets-button {
+  font-family: Geneva, sans-serif;
+  margin-top: 10px;
+  display: inline-block;
+  text-decoration: none;
+  margin-left: 15px;
+  color: #D07941;
+  font-weight: bold;
+}
+
+.new-tweets-button:hover {
+  color: red;
+}
+
 .tweets {
   height: 520px;
   width: 550px;

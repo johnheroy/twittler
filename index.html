@@ -17,6 +17,9 @@
           <input class="compose-input" type="text" placeholder="write a message">
         </form>
       </div>
+      <div class="new-tweets" style="display: none">
+        <a href="#" class="new-tweets-button"></a>
+      </div>
       <div class="tweets"></div>
     </div>
 
@@ -25,9 +28,11 @@
       $(document).ready(function(){
         var $body = $('body');
         var $tweets = $('.tweets');
+        var $newTweets = $('.new-tweets');
+        var newTweetCount = 0;
 
         var displayTweet = function(tweet) {
-          var $tweet = $('<div class="tweet"></div>');
+          var $tweet = $('<div class="tweet" style="display: none"></div>');
 
           // username
           $username = $('<div class="tweet-username"></div>');
@@ -45,25 +50,44 @@
           $message.appendTo($tweet);
 
           $tweet.prependTo($tweets);
+
+          newTweetCount += 1;
+          $('.new-tweets-button').text('There are ' + newTweetCount + ' new tweets!');
+          $newTweets.show(500);
+          $tweets.height(479);
+
         };
 
         var fetchNewTweets = function() {
           var index = streams.home.length - 1;
-          while(index >= 0){
+          while(index >= 0) {
             var tweet = streams.home[index];
 
-            if (!tweet.read) {
+            if (!tweet.loaded) {
               displayTweet(tweet);  
-              tweet.read = true;  
+              tweet.loaded = true;  
             } else {
               // do nothing if tweet already read
+              break;
             }
 
             index -= 1;
           }
         };
+
+        var showNewTweets = function () {
+          $tweets.children().show();
+          newTweetCount = 0;
+          $newTweets.hide();
+          $tweets.height(480);
+        };
+
+        $('.new-tweets-button').on('click', function() {
+          showNewTweets();
+        });
         
         fetchNewTweets();
+        showNewTweets();
         setInterval(function() {
           fetchNewTweets();
         }, 1000);

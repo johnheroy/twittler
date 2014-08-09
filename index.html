@@ -8,16 +8,14 @@
   <body>
     <div class="container">
       <div class="logo">twittler</div>
-      <div class="profile">
-        <div class="profile-title">My Profile</div>
-        <div class="profile-pic-container">There is no picture here yet...</div>
-        <!-- need some input for email + "username" and then below a place to send a new twittle -->
+      <div class="compose">
+        <div class="compose-title">Compose</div>
         <form>
-          Email: <input type="text" placeholder="for your picture..."><br>
-          Username: <input type="text" placeholder="be creative!">
+          <span class="compose-label">Username: </span>
+          <input class="compose-input" type="text" placeholder="who are you?"><br>
+          <span class="compose-label">Message: </span>
+          <input class="compose-input" type="text" placeholder="write a message">
         </form>
-        <h3>Compose a tweetle</h3>
-        <textarea rows="4" cols="30"></textarea>
       </div>
       <div class="tweets"></div>
     </div>

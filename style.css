@@ -24,7 +24,7 @@
 
 /* profile area */
 
-.profile {
+.compose {
   height: 520px;
   width: 250px;
   display: inline-block;
@@ -33,20 +33,27 @@
   border-bottom-left-radius: 10px;
 }
 
-.profile-title {
+.compose-title {
   font-size: 24px;
   font-family: Geneva, sans-serif;
   font-weight: bold;
   margin-top: 20px;
   margin-left: 20px;
+  margin-bottom: 20px;
 }
 
-.profile-pic-container {
-  height: 150px;
+.compose-label {
+  margin-left: 40px;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.compose-input {
+  margin-left: 40px;
   width: 150px;
-  border: 1px black solid;
-  margin-top: 25px;
-  margin-left: 30px;
 }
 
 /* tweets area */

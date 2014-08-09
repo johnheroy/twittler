@@ -52,7 +52,11 @@
           $tweet.prependTo($tweets);
 
           newTweetCount += 1;
-          $('.new-tweets-button').text('There are ' + newTweetCount + ' new tweets!');
+          if (newTweetCount === 1) {
+            $('.new-tweets-button').text('There is ' + newTweetCount + ' new tweet!');  
+          } else {
+            $('.new-tweets-button').text('There are ' + newTweetCount + ' new tweets!');  
+          }
           $newTweets.show(500);
           $tweets.height(479);
 

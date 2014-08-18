@@ -77,6 +77,8 @@
 .compose-input {
   margin-left: 40px;
   width: 150px;
+  border-radius: 4px;
+  height: 20px;
 }
 
 /* tweets area */

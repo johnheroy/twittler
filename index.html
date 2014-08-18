@@ -7,7 +7,17 @@
   </head>
   <body>
     <div class="container">
-      <div class="logo">twittler</div>
+      <div class="logo">
+        twittler
+        <div class="current-user-nav" style="display: none">
+          <div class="current-user">
+            <span class="current-username"></span>'s feed
+          </div>
+          <a href="#" class="back-button">
+            << go back home
+          </a>
+        </div>
+      </div>
       <div class="compose">
         <div class="compose-title">Compose</div>
         <form>
@@ -101,7 +111,21 @@
           currentTweetCount = 0;
           $('.tweets').html('');
           displayNewTweets(currentTweetStream);
+
+          $('.current-username').text(username);
+          $('.current-user-nav').show();
         });
+
+        // go back home
+        $('.back-button').on('click', function(e) {
+          e.preventDefault();
+          currentTweetStream = streams.home;
+          currentTweetCount = 0;
+          $('.tweets').html('');
+          displayNewTweets(currentTweetStream);
+
+          $('.current-user-nav').hide();
+        }); 
         
         displayNewTweets(currentTweetStream);
         setInterval(function() {

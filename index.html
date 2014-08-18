@@ -14,7 +14,7 @@
           <span class="compose-label">Username: </span>
           <input class="compose-input" type="text" placeholder="who are you?"><br>
           <span class="compose-label">Message: </span>
-          <input class="compose-input" type="text" placeholder="write a message">
+          <input class="compose-input" type="text" placeholder="write a...tweetle">
         </form>
       </div>
       <div class="new-tweets" style="display: none">
@@ -31,12 +31,14 @@
         var $newTweets = $('.new-tweets');
         var $newTweetsButton = $('.new-tweets-button');
         var newTweetCount = 0;
+        var currentTweetCount = 0;
+        var currentTweetStream = streams.home;
 
         var displayTweet = function(tweet) {
-          var $tweet = $('<div class="tweet" style="display: none"></div>');
+          var $tweet = $('<div class="tweet"></div>');
 
           // username
-          $username = $('<div class="tweet-username"></div>');
+          $username = $('<a href="#" class="tweet-username"></a>');
           $username.text('@' + tweet.user);
           $username.appendTo($tweet);
 
@@ -51,54 +53,64 @@
           $message.appendTo($tweet);
 
           $tweet.prependTo($tweets);
-
-          newTweetCount += 1;
-          if (newTweetCount === 1) {
-            $newTweetsButton.text('There is ' + newTweetCount + ' new tweet!');  
-          } else {
-            $newTweetsButton.text('There are ' + newTweetCount + ' new tweets!');  
-          }
-          $newTweets.show(500);
-          $tweets.height(479);
-
         };
 
-        var fetchNewTweets = function() {
-          var index = streams.home.length - 1;
-          while(index >= 0) {
-            var tweet = streams.home[index];
-
-            if (!tweet.loaded) {
-              displayTweet(tweet);  
-              tweet.loaded = true;  
-            } else {
-              // do nothing if tweet already read
-              break;
-            }
-
+        var displayNewTweets = function(tweets) {
+          var index = tweets.length - 1;
+          while(index >= currentTweetCount) {
+            var tweet = tweets[index];
+            displayTweet(tweet);  
             index -= 1;
           }
+          currentTweetCount = tweets.length;
         };
 
-        var showNewTweets = function () {
-          $newTweets.hide();
-          $tweets.children().show();
-          newTweetCount = 0;
-          $newTweetsButton.text('');
-          $tweets.height(480);
+        var checkNewTweets = function(tweets) {
+          var totalTweets = tweets.length;
+          var newTweetCount = totalTweets - currentTweetCount;
+
+          var showNewTweetCount = function() {
+            if (!$newTweets.is(':visible')) {
+              $tweets.animate({height: '479px'}, 500);
+              $newTweets.show(500);  
+            }
+          };
+
+          if (newTweetCount === 1) {
+            $newTweetsButton.text('There is ' + newTweetCount + ' new tweet!');
+            showNewTweetCount();  
+          } else if (newTweetCount > 0) {
+            $newTweetsButton.text('There are ' + newTweetCount + ' new tweets!');
+            showNewTweetCount(); 
+          }
         };
 
         $('.new-tweets-button').on('click', function() {
-          showNewTweets();
+          displayNewTweets(currentTweetStream);
+          $newTweets.hide();
+          $tweets.height(500);
+          newTweetCount = 0;
+          $newTweetsButton.text('');
+        });
+
+        // showing other users
+        $('.tweets').on('click', '.tweet-username', function(e) {
+          e.preventDefault();
+          var username = $(this).text().substr(1);
+          currentTweetStream = streams.users[username];
+          currentTweetCount = 0;
+          $('.tweets').html('');
+          displayNewTweets(currentTweetStream);
         });
         
-        fetchNewTweets();
-        showNewTweets();
+        displayNewTweets(currentTweetStream);
         setInterval(function() {
-          fetchNewTweets();
+          checkNewTweets(currentTweetStream);
         }, 1000);
 
       });
+
+
 
     </script>
   </body>
